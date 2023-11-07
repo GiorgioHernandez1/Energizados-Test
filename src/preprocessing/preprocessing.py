@@ -165,13 +165,13 @@ class TsfelVars(BaseEstimator, TransformerMixin):
 
     def extra_cols(self, df, domain, cols, window=12):
         cfg = tsfel.get_features_by_domain(domain)
-        df_result = tsfel.time_series_features_extractor(cfg, df[cols].values,n_jobs=-1)
+        df_result = tsfel.time_series_features_extractor(cfg, df[cols].values.to_list(),n_jobs=-1)
         df_result['index'] = df.index
         return df_result
     
     def compute_by_json(self,df, cols, window=12):
         cfg = tsfel.get_features_by_domain(json_path=self.features_names_path)
-        df_result = tsfel.time_series_features_extractor(cfg, df[cols].values,n_jobs=-1)
+        df_result = tsfel.time_series_features_extractor(cfg, df[cols].values.to_list(),n_jobs=-1)
         df_result['index'] = df.index
         return df_result
 
